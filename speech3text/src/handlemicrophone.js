@@ -87,16 +87,18 @@ exports.handleMicrophone = function(token, model, mic, callback) {
     var url = 'http://ec2-52-33-131-240.us-west-2.compute.amazonaws.com:5000/give_text';
 
     $.ajax({
-      type: "POST",
-      url: url,
-      text: finalText,
-      success: function(data) {
-        console.log('yay');
-      },
-      error: function(data) {
-        console.log('noooo');
-      }
-    });
+          type: "POST",
+          url: url,
+          data: JSON.stringify({text: finalText}),
+          contentType: 'application/json; charset=utf-8',
+          dataType: "json",
+          success: function(data) {
+            console.log(data);
+          },
+          error: function(data) {
+            console.log(data.responseText);
+          }
+        });
 
   }
 
