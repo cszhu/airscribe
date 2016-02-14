@@ -14,7 +14,7 @@ def give_text():
     text =  request.json['text']
     print 'Recieved Text:'
     print text 
-    text = open('input.txt', 'r').read() # Temp to test on input
+    # text = open('input.txt', 'r').read() # Temp to test on input
     analyzed = air.analyze(text) 
     print "Returning Text:"
     print analyzed
