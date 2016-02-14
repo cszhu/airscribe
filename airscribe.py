@@ -218,6 +218,7 @@ def get_question_db():
 			'key_word' : "alone",
 			'standard_form' : "Lives alone", 
 			'answers' : ["yes", "no"],
+			# if live alone, send check up
 			'feedback' : ["", "Since patient lives alone, schedule weekly phone call to check in"]})
 			# if live alone, send check up
 	question_db.append({
@@ -226,8 +227,8 @@ def get_question_db():
 			'key_word' : "stairs",
 			'standard_form' : "Stairs in home:", 
 			'answers' : ["yes", "no"],
-			'feedback' : ["Since patient's home has stairs, consider assigning medical assistant for weekly check up", ""]})
 			# if stairs, weekly check up by medical assistant
+			'feedback' : ["Since patient's home has stairs, consider assigning medical assistant for weekly check up", ""]})
 	question_db.append({
 			'qid' : 6,
 			'spoken_form' : "do you have medical insurance", 
