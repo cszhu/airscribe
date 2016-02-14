@@ -69,9 +69,7 @@ exports.handleMicrophone = function(token, model, mic, callback) {
   }
 
   function onMessage(msg) {
-    console.log('recognition result in json format: ' + msg.data);
     if (msg.results) {
-      console.log('results!!' + msg.results);
       baseString = display.showResult(msg, baseString, model);
       baseJSON = display.showJSON(msg, baseJSON);
     }
@@ -83,7 +81,23 @@ exports.handleMicrophone = function(token, model, mic, callback) {
 
   function onClose(evt) {
     console.log('Mic socket close: ', evt);
-    console.log(document.getElementById('resultsText').value);
+    var finalText = document.getElementById('resultsText').value;
+    console.log(finalText);
+
+    var url = 'http://ec2-52-33-131-240.us-west-2.compute.amazonaws.com:5000/give_text';
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      text: finalText,
+      success: function(data) {
+        console.log('yay');
+      },
+      error: function(data) {
+        console.log('noooo');
+      }
+    });
+
   }
 
   initSocket(options, onOpen, onListening, onMessage, onError, onClose);
