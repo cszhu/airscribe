@@ -15,6 +15,7 @@ def analyze(block_of_text):
 
 	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
 	interview = block_of_text.split("Start interview.")
+	header_info = ""
 	if len(interview) == 2:
 		header_info = interview[0]
 		block_of_text = interview[1]
