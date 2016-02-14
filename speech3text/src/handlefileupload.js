@@ -82,6 +82,74 @@ exports.handleFileUpload = function(type, token, model, file, contentType, callb
       localStorage.setItem('currentlyDisplaying', 'false');
       onend(evt);
       console.log('Socket closing: ', evt);
+
+      var finalText = document.getElementById('resultsText').value;
+      console.log(finalText);
+
+      var url = 'http://ec2-52-33-131-240.us-west-2.compute.amazonaws.com:5000/give_text';
+
+      $.ajax({
+            type: "POST",
+            url: url,
+            data: JSON.stringify({text: finalText}),
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            success: function(data) {
+              console.log(data);
+            },
+            error: function(data) {
+              console.log(data.responseText);
+              var raw = data.responseText;
+              var sentences = raw.split('\n');
+              document.getElementById('interview-results').innerHTML="";
+
+              var node, boldNode, boldText, div, textNode, text;
+              node = document.createElement('h2');
+              boldNode = document.createElement('b');
+              boldText = document.createTextNode(sentences[0]);
+              boldNode.appendChild(boldText);
+              node.appendChild(boldNode);
+              console.log(node);
+              document.getElementById('interview-results').appendChild(node);
+
+              var i = 1;
+              while(sentences[i].search("Airscribe") == -1) {
+                var current = sentences[i];
+                if (current.search("\\?") > 0 ) {
+                  console.log("a q question");
+                  console.log(current);
+                  i++;
+                  var next = sentences[i];
+                  console.log(next);
+                  addBoldAndAnswer(current, next);
+                  i++;
+                } else if ((current.search(":") > 0) && (current.search("A") == -1)) {
+                  var substrings = current.split(":");
+                  addBoldAndAnswer(substrings[0], substrings[1]);
+                  i++;
+                } else {
+                  addBoldAndAnswer(current, "");
+                  i++;
+                }
+              }
+
+              function addBoldAndAnswer(a, b) {
+                var node, boldNode, boldText, div, textNode, text;
+                node = document.createElement('p');
+                boldNode = document.createElement('b');
+                textNode = document.createElement('p');
+                boldText = document.createTextNode(a);
+                text = document.createTextNode(b);
+                boldNode.appendChild(boldText);
+                textNode.appendChild(text);
+                node.appendChild(boldNode);
+                node.appendChild(textNode);
+                console.log(node);
+                document.getElementById('interview-results').appendChild(node);
+              }
+
+            }
+          });
     }
 
     initSocket(options, onOpen, onListening, onMessage, onError, onClose);
