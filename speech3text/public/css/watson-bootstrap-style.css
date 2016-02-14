@@ -5742,3 +5742,11 @@ table.table,
   position: relative;
   left: 8px;
 }
+
+#interview-results{
+  max-height: 1000px;
+  overflow-y: scroll;
+  /*border: 3px solid #8A9693;*/
+  padding: 10 10 10 10;
+  background-color: #f4f4f4;
+}
