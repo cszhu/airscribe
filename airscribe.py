@@ -14,8 +14,10 @@ def analyze(block_of_text):
 	spoken_questions = get_spoken_questions(question_db)
 
 	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
-	header_info = block_of_text.split("Start interview.")[0]
-	block_of_text = block_of_text.split("Start interview.")[1]
+	interview = block_of_text.split("Start interview.")
+	if len(interview) == 2:
+		header_info = interview[0]
+		block_of_text = interview[1]
 
 	sentences = breakdown(block_of_text)
 	qanda, dialogue = get_qanda(sentences, spoken_questions, question_db)
