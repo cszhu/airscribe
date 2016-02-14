@@ -1453,7 +1453,7 @@ table {
 }
 th {
   text-align: left;
-  background-color: #c0e6ff; /* blue 10*/
+  background-color: #cfe1dc; /* blue 10*/
 /*  border-top: 2px solid #121212;*/
 }
 .table {
@@ -1516,7 +1516,7 @@ th {
 }
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 table col[class*="col-"] {
   position: static;
@@ -1541,13 +1541,13 @@ table th[class*="col-"] {
 .table > thead > tr.active > th,
 .table > tbody > tr.active > th,
 .table > tfoot > tr.active > th {
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .table-hover > tbody > tr > td.active:hover,
 .table-hover > tbody > tr > th.active:hover,
 .table-hover > tbody > tr.active:hover > td,
 .table-hover > tbody > tr.active:hover > th {
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .table > thead > tr > td.success,
 .table > tbody > tr > td.success,
@@ -1581,13 +1581,13 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
 .table-hover > tbody > tr.info:hover > td,
 .table-hover > tbody > tr.info:hover > th {
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .table > thead > tr > td.warning,
 .table > tbody > tr > td.warning,
@@ -1680,7 +1680,7 @@ table th[class*="col-"] {
 /*code pen table */
 table {
     margin: 2em 0 0 0;
-    /*border-bottom: 3px solid #c0e6ff;*/
+    /*border-bottom: 3px solid #cfe1dc;*/
     width: 100%;
     padding:0;
     border-collapse: collapse;
@@ -1689,7 +1689,7 @@ table {
   }
 
   table tr {
-    border-bottom: 2px solid #c0e6ff; /*blue 10*/
+    border-bottom: 2px solid #cfe1dc; /*blue 10*/
     padding: 5px;
   }
 
@@ -1724,7 +1724,7 @@ table {
     table td {
       display: block;
       text-align: right;
-    border-bottom: 2px solid #c0e6ff; /*blue 10*/
+    border-bottom: 2px solid #cfe1dc; /*blue 10*/
     }
 
     table td:last-child {
@@ -1950,7 +1950,7 @@ select[multiple].input-lg {
 .has-success .input-group-addon {
   color: #121212; /*blue 60*/
   border-color: #121212; /*blue 60*/
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .has-success .form-control-feedback {
   color: #121212;
@@ -2288,7 +2288,7 @@ fieldset[disabled] .btn-success.active {
 }
 .btn-info {
   color: #121212; /*blue 60*/
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
   text-decoration: none;
   margin: 1em 1em 1em 0;
   border: 1px solid #121212; /*blue 60*/
@@ -2299,7 +2299,7 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #121212; /*blue 60*/
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
   text-decoration: none;
   margin: 1em 1em 0 0;
   border: 1px solid #121212; /*blue 60*/
@@ -2308,7 +2308,7 @@ fieldset[disabled] .btn-success.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #121212; /*blue 60*/
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
   text-decoration: none;
   margin: 1em 1em 0 0;
   border: 1px solid #121212; /*blue 60*/
@@ -2579,7 +2579,7 @@ input[type="button"].btn-block {
 .dropdown-menu > li > a:focus {
   text-decoration: none;
   color: #121212; /*blue 60*/
-  background-color: #C0E6FF; /*blue 10*/
+  background-color: #cfe1dc; /*blue 10*/
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
