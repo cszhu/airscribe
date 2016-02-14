@@ -116,11 +116,12 @@ exports.handleMicrophone = function(token, model, mic, callback) {
               if (current.search("\\?") > 0 ) {
                 console.log("a q question");
                 console.log(current);
-                console.log(sentences[i++]);
-                addBoldAndAnswer(current, sentences[i++]);
                 i++;
+                var next = sentences[i];
+                console.log(next);
+                addBoldAndAnswer(current, next);
                 i++;
-              } else if (current.search(":") > 0) {
+              } else if ((current.search(":") > 0) && (current.search("A") == -1)) {
                 var substrings = current.split(":");
                 addBoldAndAnswer(substrings[0], substrings[1]);
                 i++;
