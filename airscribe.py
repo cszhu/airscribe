@@ -14,7 +14,7 @@ def analyze(block_of_text):
 	spoken_questions = get_spoken_questions(question_db)
 
 	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
-	interview = block_of_text.split("Start interview.")
+	interview = block_of_text.split("Starts interview.")
 	header_info = ""
 	if len(interview) == 2:
 		header_info = interview[0]

@@ -1,4 +1,4 @@
-gfrom flask import Flask,request
+from flask import Flask,request
 import airscribe as air
 from flask.ext.cors import CORS
 
