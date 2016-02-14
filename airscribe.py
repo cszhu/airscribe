@@ -59,7 +59,8 @@ def get_qanda(sentences, spoken_questions):
 		# new question
 		isQuestion = False
 		for spq in spoken_questions:
-			if edit_distance(sentence.lower(), spq) == 0: 
+			# is this edit distance reasonable?
+			if word_edit_distance(sentence.lower(), spq) <= 2: 
 				isQuestion = True
 				# deal with prev question
 				if curr_question:
@@ -194,6 +195,12 @@ def edit_distance(s1, s2):
             tbl[i,j] = min(tbl[i, j-1]+1, tbl[i-1, j]+1, tbl[i-1, j-1]+cost)
 
     return tbl[i,j]
+
+def word_edit_distance(str1, str2):
+	words1 = str1.split()
+	words2 = str2.split()
+	dist = list(set(words1) - set(words2)) + list(set(words2) - set(words1))
+	return len(dist)
 
 # for testing; comment out if needed
 if __name__ == "__main__":
