@@ -1,4 +1,4 @@
-from flask import Flask,request
+gfrom flask import Flask,request
 import airscribe as air
 from flask.ext.cors import CORS
 
@@ -13,9 +13,9 @@ def give_text():
         return "no thanks bae :'("
     text =  request.json['text']
     print 'Recieved Text:'
-    print text 
+    print text
     # text = open('input.txt', 'r').read() # Temp to test on input
-    analyzed = air.analyze(text) 
+    analyzed = air.analyze(text)
     print "Returning Text:"
     print analyzed
     out = open('out.txt', 'w').write(analyzed)

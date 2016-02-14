@@ -100,10 +100,27 @@ exports.handleMicrophone = function(token, model, mic, callback) {
             var raw = data.responseText;
             var sentences = raw.split('\n');
             document.getElementById('interview-results').innerHTML="";
-            var i=0;
+
+            var node, boldNode, boldText, div, textNode, text;
+            node = document.createElement('h2');
+            boldNode = document.createElement('b');
+            boldText = document.createTextNode(sentences[0]);
+            boldNode.appendChild(boldText);
+            node.appendChild(boldNode);
+            console.log(node);
+            document.getElementById('interview-results').appendChild(node);
+
+            var i = 1;
             while(sentences[i].search("Airscribe") == -1) {
               var current = sentences[i];
-              if (current.search(":") > 0) {
+              if (current.search("\\?") > 0 ) {
+                console.log("a q question");
+                console.log(current);
+                console.log(sentences[i++]);
+                addBoldAndAnswer(current, sentences[i++]);
+                i++;
+                i++;
+              } else if (current.search(":") > 0) {
                 var substrings = current.split(":");
                 addBoldAndAnswer(substrings[0], substrings[1]);
                 i++;
