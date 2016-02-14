@@ -228,7 +228,7 @@ def get_question_db():
 			'standard_form' : "Lives alone", 
 			'answers' : ["yes", "no"],
 			# if live alone, send check up
-			'feedback' : ["", "Since patient lives alone, schedule weekly phone call to check in"]})
+			'feedback' : ["Since patient lives alone, schedule weekly phone call to check in", ""]})
 			# if live alone, send check up
 	question_db.append({
 			'qid' : 5,
