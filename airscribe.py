@@ -4,12 +4,15 @@ import time
 input: input file, patient_id
 ouput: make output file
 """
-def analyze(input_file, patient_id):
+def analyze(block_of_text):
+	# hard code patient_id heh
+	patient_id = 12345
+
 	# random notes: can only ask each question once, must ask exactly word for word
 	question_db = get_question_db()
 	spoken_questions = get_spoken_questions(question_db)
 
-	sentences = breakdown(input_file)
+	sentences = breakdown(block_of_text)
 	qanda = get_qanda(sentences, spoken_questions)
 
 	doc_text = ""
@@ -27,17 +30,16 @@ def analyze(input_file, patient_id):
 	date = time.strftime("%y%m%d")
 	print_to_document(doc_text, "pid{0}_discharge_{1}.txt".format(patient_id, date))
 
+	# alternatively, return block of text
+	return doc_text
+
 """
 input: text file
 output: list of sentences
 """
-def breakdown(input_file):
+def breakdown(block_of_text):
 	# note IBM watson has periods but no other punctuation
-	chunk_of_text = ""
-	with open(input_file, 'r') as f:
-		# expect file to be one long line
-		text = f.readlines()
-	sentences = text[0].strip().split(".")
+	sentences = block_of_text.strip().split(".")
 	processed = []
 	for s in sentences:
 		s = s.strip()
@@ -49,20 +51,23 @@ def breakdown(input_file):
 input: list of sentences
 output: dictionary of responses
 """
-def get_qanda(sentences, question_db):
+def get_qanda(sentences, spoken_questions):
 	qanda = {}
 	curr_question = None
 	response = "" # usually an answer
 	for sentence in sentences:
 		# new question
-		if sentence.lower() in question_db: 
-			# print sentence
-			# deal with prev question
-			if curr_question:
-				qanda[curr_question] = response
-			curr_question = sentence
-			response = ""
-		else:
+		isQuestion = False
+		for spq in spoken_questions:
+			if edit_distance(sentence.lower(), spq) == 0: 
+				isQuestion = True
+				# deal with prev question
+				if curr_question:
+					qanda[curr_question] = response
+				curr_question = spq[0].upper() + spq[1:]
+				response = ""
+		# sentence is not a question
+		if not isQuestion:
 			response += sentence + ". "
 	# last question
 	if curr_question:
@@ -176,10 +181,25 @@ def get_spoken_questions(question_db):
 		spoken_questions.append(question['spoken_form'])
 	return spoken_questions
 
+def edit_distance(s1, s2):
+    m=len(s1)+1
+    n=len(s2)+1
+
+    tbl = {}
+    for i in range(m): tbl[i,0]=i
+    for j in range(n): tbl[0,j]=j
+    for i in range(1, m):
+        for j in range(1, n):
+            cost = 0 if s1[i-1] == s2[j-1] else 1
+            tbl[i,j] = min(tbl[i, j-1]+1, tbl[i-1, j]+1, tbl[i-1, j-1]+cost)
+
+    return tbl[i,j]
+
+# for testing; comment out if needed
 if __name__ == "__main__":
 	# sample workflow
-	input_file = "input.txt"
-	# need patient info
 	patient_id = 12345
-	analyze("input.txt", patient_id)
+	with open("input.txt", 'r') as f:
+		block_of_text = f.readlines()[0]
+	analyze(block_of_text)
 
