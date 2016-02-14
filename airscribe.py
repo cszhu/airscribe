@@ -249,7 +249,8 @@ def get_question_db():
 			'spoken_form' : "do you have medical insurance", 
 			'key_word' : "insurance",
 			'standard_form' : "Has insurance", 
-			'answers' : ["yes", "no"]})
+			'answers' : ["yes", "no"],
+			'feedback' : ["", "Patient does not have health insurance; consult social workers"]})
 
 	#print question_db
 	return question_db
