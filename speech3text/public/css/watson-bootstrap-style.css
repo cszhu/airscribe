@@ -172,6 +172,7 @@ textarea {
   color: inherit;
   font: inherit;
   margin: 0;
+  line-height: 2em;
 }
 button {
   overflow: visible;
@@ -347,7 +348,7 @@ select,
 textarea {
   font-family: inherit;
   font-size: inherit;
-  line-height: inherit;
+  line-height: 2em;
 
 }
 
@@ -579,7 +580,7 @@ h6,
 p {
   font-size: 16px;
   font-family: font-family: 'Helvetica Neue for IBM', Helvetica, Arial, Roboto, sans-serif;
-  line-height: 2em;
+  /*line-height: 4em;*/
 }
 small,
 .small {
@@ -631,6 +632,7 @@ ol {
 }
 ol > li {
   font-size: 16px;
+  line-height: 2em;
 }
 ul ul,
 ol ul,
@@ -1693,6 +1695,7 @@ table {
   table tr {
     border-bottom: 2px solid #cfe1dc; /*blue 10*/
     padding: 5px;
+    line-height:2em;
   }
 
 
@@ -2016,6 +2019,7 @@ select[multiple].input-lg {
   display: block;
   color: #5a5a5a; /*gray 60*/
   padding-bottom: 1em;
+  line-height: 2em;
 }
 @media (min-width: 768px) {
   .form-inline .form-group {
