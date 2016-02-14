@@ -175,10 +175,13 @@ PATIENT NAME:
 """
 def generate_document_header(header_info, patient_id):
 	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
-	info = header_info.split(".")
-	patient_name = info[1].strip()
+	patient_name = ""
+	interviewer_name = ""
 	date = time.strftime("%b %d, %Y")
-	interviewer_name = info[3].strip()
+	info = header_info.split(".")
+	if len(info) >= 4:
+		patient_name = info[1].strip()
+		interviewer_name = info[3].strip()
 	text = "Hospital Discharge Interview\nPATIENT ID: {0}\nPATIENT NAME: {1}\n".format(patient_id, patient_name) 
 	text += "DATE: {0}\nINTERVIEWER: {1}\n".format(date, interviewer_name)
 	return text
