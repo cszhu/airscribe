@@ -1,4 +1,5 @@
 import time
+from random import randint
 
 """
 input: input file, patient_id
@@ -6,17 +7,21 @@ ouput: make output file
 """
 def analyze(block_of_text):
 	# hard code patient_id heh
-	patient_id = 12345
+	patient_id = ''.join(["%s" % randint(0, 9) for num in range(0, 10)])
 
 	# random notes: can only ask each question once, must ask exactly word for word
 	question_db = get_question_db()
 	spoken_questions = get_spoken_questions(question_db)
 
+	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
+	header_info = block_of_text.split("Start interview.")[0]
+	block_of_text = block_of_text.split("Start interview.")[1]
+
 	sentences = breakdown(block_of_text)
 	qanda, dialogue = get_qanda(sentences, spoken_questions, question_db)
 
 	doc_text = ""
-	doc_text += generate_document_header(patient_id)
+	doc_text += generate_document_header(header_info, patient_id)
 	doc_text +=  "\n=== Information ===\n"
 	standard_text, standard_dict = generate_standard(qanda, question_db)
 	doc_text += standard_text
@@ -165,10 +170,12 @@ output: patient details???
 PATIENT ID:
 PATIENT NAME:
 """
-def generate_document_header(patient_id):
-	patient_name = "Parkinson, Pansy"
+def generate_document_header(header_info, patient_id):
+	# header_info = "Patient name. Mike Jones. Interviewer name. Christina Zhu. Start interview."
+	info = header_info.split(".")
+	patient_name = info[1].strip()
 	date = time.strftime("%b %d, %Y")
-	interviewer_name = "Zhu, Eugenie"
+	interviewer_name = info[3].strip()
 	text = "Hospital Discharge Interview\nPATIENT ID: {0}\nPATIENT NAME: {1}\n".format(patient_id, patient_name) 
 	text += "DATE: {0}\nINTERVIEWER: {1}\n".format(date, interviewer_name)
 	return text
@@ -204,7 +211,9 @@ def get_question_db():
 			'spoken_form' : "what city do you live in", # what city do you live in
 			'key_word' : "city",
 			'standard_form' : "Hometown", 
-			'answers' : ["fremont", "san jose", "san francisco"]})
+			'answers' : ["fremont", "san jose", "san francisco", "cupertino", "new york",
+			"tokyo", "beijing", "palo alto", "berkeley", "paris", "toronto", "seattle",
+			"walnut creek", "san mateo", "pasadena", "los angeles", "santa clara", "saratoga"]})
 	question_db.append({
 			'qid' : 3,
 			'spoken_form' : "what kind of building is your home", 
@@ -225,7 +234,7 @@ def get_question_db():
 			'qid' : 5,
 			'spoken_form' : "do you have stairs in your house", 
 			'key_word' : "stairs",
-			'standard_form' : "Stairs in home:", 
+			'standard_form' : "Stairs in home", 
 			'answers' : ["yes", "no"],
 			# if stairs, weekly check up by medical assistant
 			'feedback' : ["Since patient's home has stairs, consider assigning medical assistant for weekly check up", ""]})
@@ -277,7 +286,6 @@ def match_qid(sentence, question_db):
 # for testing; comment out if needed
 if __name__ == "__main__":
 	# sample workflow
-	patient_id = 12345
 	with open("input.txt", 'r') as f:
 		block_of_text = f.readlines()[0]
 	analyze(block_of_text)
