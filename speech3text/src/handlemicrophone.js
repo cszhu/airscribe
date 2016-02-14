@@ -97,6 +97,37 @@ exports.handleMicrophone = function(token, model, mic, callback) {
           },
           error: function(data) {
             console.log(data.responseText);
+            var raw = data.responseText;
+            var sentences = raw.split('\n');
+
+            var i=0;
+            while(sentences[i].search("Airscribe") == -1) {
+              var current = sentences[i];
+              if (current.search(":") > 0) {
+                var substrings = current.split(":");
+                addBoldAndAnswer(substrings[0], substrings[1]);
+                i++;
+              } else {
+                addBoldAndAnswer(current, "");
+                i++;
+              }
+            }
+
+            function addBoldAndAnswer(a, b) {
+              var node, boldNode, boldText, div, textNode, text;
+              node = document.createElement('p');
+              boldNode = document.createElement('b');
+              textNode = document.createElement('p');
+              boldText = document.createTextNode(a);
+              text = document.createTextNode(b);
+              boldNode.appendChild(boldText);
+              textNode.appendChild(text);
+              node.appendChild(boldNode);
+              node.appendChild(textNode);
+              console.log(node);
+              document.getElementById('interview-results').appendChild(node);
+            }
+
           }
         });
 
