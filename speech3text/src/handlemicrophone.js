@@ -99,7 +99,7 @@ exports.handleMicrophone = function(token, model, mic, callback) {
             console.log(data.responseText);
             var raw = data.responseText;
             var sentences = raw.split('\n');
-
+            document.getElementById('interview-results').innerHTML="";
             var i=0;
             while(sentences[i].search("Airscribe") == -1) {
               var current = sentences[i];
